@@ -1,4 +1,18 @@
-﻿node_modules/
+node_modules/
 *.log
-host-patch/
+*.tgz
+*.zip
 
+# local scaffolding
+host-patch/
+.dsh-account-balance-dev/
+
+# secrets and machine-local config
+.env
+.env.*
+.npmrc
+*.pem
+*.key
+credentials.json
+.DS_Store
+Thumbs.db
