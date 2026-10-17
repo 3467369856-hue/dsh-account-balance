@@ -1,0 +1,5 @@
+# dsh-account-balance bundle patch: mounts this plugin into a profile's layer stack.
+# Exactly one insert; the profile-level cordis.patch.yml must not repeat this id.
+- insert:
+    - id: dsh-account-balance
+      name: 'dsh-account-balance'
