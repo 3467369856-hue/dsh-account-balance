@@ -17,25 +17,7 @@ npm install -g dsh-account-balance-0.1.0.tgz
 # 方式二：放进 DSH profile 的 node_modules，并在 dsh.profile.bundles 里登记包名
 ```
 
-### 从源码构建
-
-仓库不提交构建产物，装包前先生成：
-
-```bash
-npm pack                 # 产出 dsh-account-balance-0.1.0.tgz
-```
-
-### 在 DSH 里启用
-
-插件通过 `package.json` 的 `dsh.client` 声明自己（`platform: web`），由 DSH 的模块加载器在启动时装载。两种启用方式：
-
-1. **profile 安装**：包放进 DSH profile 的 `node_modules`，并在该 profile 的 `dsh.profile.bundles` 里登记包名，然后重启 DSH。
-2. **开发目录**：把仓库目录 junction 到 profile 的 `node_modules\dsh-account-balance`，客户端 HMR 会直接加载改动，无需重启。
-
-### 版本兼容
-
-- 面向 DSH `0.2.0-rc` 系列客户端的 slot / store 约定编写，未在其他版本上验证
-- 依赖的私有选择器（见「已知问题」）随上游 DOM 变化可能失效，升级 DSH 后建议对照检查
+重启 DSH 生效；开发时把目录 junction 到 profile 的 `node_modules` 下，客户端 HMR 会自动加载。
 
 ## 功能说明
 
@@ -52,8 +34,7 @@ npm pack                 # 产出 dsh-account-balance-0.1.0.tgz
 
 ### 已知问题
 - 聊天区背景色为 `#F5F5F5`，与项目栏白色不一致。在 `[data-slot="main"]` 及其子树加白底（含 `!important`）均无效，说明绘制方在外层容器
-- 余额提醒条的「隐藏」按钮点击效果未实测确认（`localStorage` 持久化逻辑已写，按账号隔离）
-- 若干选择器依赖上游内部类名（`[class*="_mark"]`、`[class*="_fade"]`、`nav[aria-label="轮次导航"]`），上游改 CSS Module 命名或无障碍标签后相关视觉可能失效，无降级逻辑
+- 余额提醒条的「隐藏」按钮点击效果未实测确认（`localStorage` 持久化逻辑已写）
 
 ## 技术实现
 - cordis 客户端插件，`dsh.client.platform = "web"`，工厂式 CJS bundle
